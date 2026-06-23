@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>清六窯</title>
+
+  <!-- 明朝體（襯線）：撐起整個白瓷的優雅氣質 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=Noto+Serif+TC:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* ===== 日間模式（白底・預設）===== */
+      --bg:        #f5f3ed;
+      --bg2:       #eceae2;
+      --card:      #ffffff;
+      --card-hi:   #fbfaf6;
+      --ink:       #2c2822;            /* 溫潤的近黑 */
+      --title:     #211d18;
+      --muted:     #8a8378;
+      --gold:      #9a7b3c;            /* 白底上用較深的金，才看得清 */
+      --gold-soft: rgba(154,123,60,0.45);
+      --gold-faint:rgba(154,123,60,0.12);
+      --line:      rgba(40,36,30,0.12);
+      --shadow:    rgba(0,0,0,0.10);
+      --grad1:     #ffffff;
+      --grad2:     #efece4;
+      --radius:    14px;
+      --serif: "Hiragino Mincho ProN", "Yu Mincho", YuMincho,
+               "Noto Serif JP", "Noto Serif TC", "Songti TC", serif;
+    }
+
+    /* ===== 夜間模式（暗色展示廳）===== */
+    :root[data-theme="dark"] {
+      --bg:        #0e0f11;
+      --bg2:       #15171b;
+      --card:      #17191e;
+      --card-hi:   #1d2026;
+      --ink:       #ece7dd;            /* 溫潤的瓷白 */
+      --title:     #f3efe7;
+      --muted:     #8b8579;
+      --gold:      #c6a15b;            /* 黑底上用較亮的金 */
+      --gold-soft: rgba(198,161,91,0.38);
+      --gold-faint:rgba(198,161,91,0.14);
+      --line:      rgba(236,231,221,0.09);
+      --shadow:    rgba(0,0,0,0.45);
+      --grad1:     #1d2128;
+      --grad2:     #0e0f11;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--serif);
+      color: var(--ink);
+      /* 放射狀漸層 → 聚光燈 / 展櫃打光 */
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 18%, var(--grad1) 0%, var(--grad2) 62%);
+      background-attachment: fixed;
+      transition: background .4s ease, color .4s ease;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 64px 18px 96px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    #app { width: 100%; max-width: 600px; }
+
+    .card { padding: 8px 6px; animation: rise 0.45s ease both; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- 首頁 ---------- */
+    .site-title {
+      font-size: 3rem;
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      padding-left: 0.42em;          /* 補回字距造成的右偏 */
+      text-align: center;
+      margin: 8px 0 0;
+      color: var(--title);
+    }
+    .site-title::after {
+      content: "";
+      display: block;
+      width: 56px; height: 1px;
+      margin: 24px auto 0;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .tagline {
+      text-align: center;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      font-size: 0.86rem;
+      line-height: 2.05;
+      white-space: pre-line;          /* 讓資料中的 \n 真正換行 */
+      margin: 24px 0 0;
+    }
+    /* 第一行（窯元・所在地）略微提亮，作為小標 */
+    .tagline-lead {
+      display: block;
+      color: var(--ink);
+      letter-spacing: 0.16em;
+      margin-bottom: 6px;
+    }
+
+    /* ---------- 內頁標題 ---------- */
+    .page-title {
+      font-size: 1.55rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      margin: 0 0 6px;
+      color: var(--title);
+    }
+    .page-sub {
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      font-size: 0.8rem;
+      margin: 0 0 30px;
+    }
+
+    /* ---------- 選項按鈕 ---------- */
+    .options { display: flex; flex-direction: column; gap: 13px; }
+
+    button.btn, a.btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      text-align: left;
+      padding: 19px 24px;
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+    button.btn:hover, a.btn:hover {
+      border-color: var(--gold-soft);
+      background: var(--card-hi);
+      box-shadow: 0 0 0 1px var(--gold-faint), 0 12px 34px var(--shadow);
+      transform: translateY(-1px);
+    }
+    .btn .meta { color: var(--gold); font-size: 0.82rem; letter-spacing: 0.1em; white-space: nowrap; }
+
+    .btn.pending {
+      cursor: not-allowed;
+      background: var(--bg2);
+      opacity: 0.42;
+    }
+    .btn.pending:hover { border-color: var(--line); background: var(--bg2); box-shadow: none; transform: none; }
+    .btn.pending .meta { color: var(--muted); }
+
+    /* ---------- 語言四宮格 ---------- */
+    .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .lang-grid button.btn {
+      justify-content: center;
+      padding: 26px 0;
+      font-size: 1.12rem;
+      letter-spacing: 0.16em;
+    }
+
+    /* ---------- Instagram ---------- */
+    .ig-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 26px; padding: 11px 26px;
+      border: 1px solid var(--gold-soft); border-radius: 999px;
+      color: var(--gold); text-decoration: none;
+      font-size: 0.82rem; letter-spacing: 0.18em;
+      transition: background .25s ease, box-shadow .25s ease;
+    }
+    .ig-link:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
+
+    /* ---------- 首頁進入鈕 ---------- */
+    .center { text-align: center; }
+    .start-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 66px; height: 66px; margin-top: 34px;
+      border: 1px solid var(--gold-soft); border-radius: 50%;
+      background: transparent; color: var(--gold);
+      font-size: 1.1rem; cursor: pointer;
+      padding-left: 4px;             /* ▶ 視覺置中 */
+      transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+    .start-btn:hover {
+      border-color: var(--gold);
+      background: var(--gold-faint);
+      box-shadow: 0 0 28px var(--gold-faint);
+    }
+
+    /* ---------- 返回列 ---------- */
+    .backbar { margin-bottom: 26px; }
+    .back-btn {
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-family: var(--serif); font-size: 0.85rem; letter-spacing: 0.12em;
+      padding: 4px 0;
+      transition: color .2s ease;
+    }
+    .back-btn:hover { color: var(--gold); }
+
+    /* ---------- 作家介紹的大觀看鈕 ---------- */
+    .watch-big {
+      display: block; text-align: center; margin-top: 10px;
+      padding: 20px;
+      border: 1px solid var(--gold-soft); border-radius: var(--radius);
+      color: var(--gold); text-decoration: none;
+      font-size: 1.05rem; letter-spacing: 0.12em;
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .watch-big:hover { background: var(--gold-faint); border-color: var(--gold); box-shadow: 0 0 26px var(--gold-faint); }
+    .watch-big.pending { color: var(--muted); border-color: var(--line); pointer-events: none; }
+
+    /* ---------- 日／夜切換鈕（固定右上角） ---------- */
+    #theme-toggle {
+      position: fixed; top: 18px; right: 18px; z-index: 20;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--gold-soft); background: var(--card);
+      color: var(--gold); font-size: 1.15rem; cursor: pointer;
+      box-shadow: 0 4px 16px var(--shadow);
+      transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    #theme-toggle:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
+
+    /* ===========================================================
+       手機專用微調（螢幕寬度 ≤ 480px 時套用）
+       電腦／平板維持原樣，手機則縮小標題、收窄邊距、按鈕更緊湊
+       =========================================================== */
+    @media (max-width: 480px) {
+      body { padding: 40px 16px 72px; }
+      .site-title { font-size: 2.2rem; letter-spacing: 0.3em; padding-left: 0.3em; }
+      .site-title::after { margin-top: 20px; }
+      .tagline { font-size: 0.76rem; letter-spacing: 0.18em; }
+      .page-title { font-size: 1.35rem; }
+      .page-sub { font-size: 0.76rem; margin-bottom: 24px; }
+      button.btn, a.btn { padding: 17px 18px; font-size: 1rem; }
+      .lang-grid button.btn { padding: 22px 0; font-size: 1.05rem; }
+      .start-btn { width: 60px; height: 60px; margin-top: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <button id="theme-toggle" aria-label="切換日間／夜間模式" title="切換日間／夜間"></button>
+  <div id="app"></div>
+
+  <!-- 資料檔：所有作家、作品、連結都在這裡 -->
+  <script src="data.js"></script>
+
+  <script>
+    /* =========================================================
+       多語介面文字（依使用者選的語言切換）
+       ========================================================= */
+    const LANGS = ["JA", "ZH", "KO", "EN"];
+    const LANG_LABEL = { JA: "日本語", ZH: "中文", KO: "한국어", EN: "English" };
+
+    const UI = {
+      JA: { pickLang: "言語をお選びください", pickSection: "ご覧になりたい内容をお選びください",
+            artistIntro: "作家紹介", worksIntro: "作品紹介", pickWork: "作品をお選びください",
+            watch: "▶ 動画を見る", pending: "準備中", back: "← 戻る", home: "← ホームへ" },
+      ZH: { pickLang: "請選擇語言", pickSection: "請選擇想觀看的內容",
+            artistIntro: "作家介紹", worksIntro: "作品介紹", pickWork: "請選擇作品",
+            watch: "▶ 觀看影片", pending: "準備中", back: "← 返回", home: "← 回首頁" },
+      KO: { pickLang: "언어를 선택하세요", pickSection: "보고 싶은 내용을 선택하세요",
+            artistIntro: "작가 소개", worksIntro: "작품 소개", pickWork: "작품을 선택하세요",
+            watch: "▶ 영상 보기", pending: "준비 중", back: "← 뒤로", home: "← 홈으로" },
+      EN: { pickLang: "Choose a language", pickSection: "Choose what you'd like to view",
+            artistIntro: "Artist Introduction", worksIntro: "Works", pickWork: "Choose a work",
+            watch: "▶ Watch video", pending: "Coming soon", back: "← Back", home: "← Home" }
+    };
+
+    /* =========================================================
+       日／夜模式切換（記憶使用者選擇）
+       ========================================================= */
+    const THEME_KEY = "seiroku-theme";
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      const btn = document.getElementById("theme-toggle");
+      // 夜間時顯示「太陽」(可切回白天)，日間時顯示「月亮」(可切到夜晚)
+      if (btn) btn.textContent = theme === "dark" ? "☀" : "☾";
+    }
+    (function initTheme() {
+      const saved = localStorage.getItem(THEME_KEY) || "light";   // 預設白底
+      applyTheme(saved);
+    })();
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const now = document.documentElement.getAttribute("data-theme");
+      const next = now === "dark" ? "light" : "dark";
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+
+    const app = document.getElementById("app");
+    const getArtist = (id) => SITE_DATA.artists.find(a => a.id === id);
+
+    function optionButton(label, meta, onClick) {
+      const b = document.createElement("button");
+      b.className = "btn";
+      const l = document.createElement("span"); l.textContent = label;
+      b.appendChild(l);
+      if (meta) { const m = document.createElement("span"); m.className = "meta"; m.textContent = meta; b.appendChild(m); }
+      b.onclick = onClick;
+      return b;
+    }
+
+    function backBar(label, onClick) {
+      const bar = document.createElement("div"); bar.className = "backbar";
+      const btn = document.createElement("button"); btn.className = "back-btn";
+      btn.textContent = label; btn.onclick = onClick;
+      bar.appendChild(btn);
+      return bar;
+    }
+
+    /* 畫面 0：首頁 */
+    function showHome() {
+      app.innerHTML = "";
+      const card = document.createElement("div"); card.className = "card center";
+
+      const h = document.createElement("h1"); h.className = "site-title"; h.textContent = SITE_DATA.siteTitle;
+      card.appendChild(h);
+      if (SITE_DATA.tagline) {
+        const t = document.createElement("p"); t.className = "tagline";
+        const lines = SITE_DATA.tagline.split("\n");
+        const lead = document.createElement("span");
+        lead.className = "tagline-lead";
+        lead.textContent = lines[0];
+        t.appendChild(lead);
+        t.appendChild(document.createTextNode(lines.slice(1).join("\n")));
+        card.appendChild(t);
+      }
+
+      if (SITE_DATA.instagram) {
+        const wrap = document.createElement("div");
+        const ig = document.createElement("a");
+        ig.className = "ig-link"; ig.href = SITE_DATA.instagram;
+        ig.target = "_blank"; ig.rel = "noopener"; ig.textContent = "Instagram";
+        wrap.appendChild(ig); card.appendChild(wrap);
+      }
+
+      const startWrap = document.createElement("div");
+      const start = document.createElement("button");
+      start.className = "start-btn"; start.textContent = "▶";
+      start.setAttribute("aria-label", "enter");
+      start.onclick = showArtists;
+      startWrap.appendChild(start);
+      card.appendChild(startWrap);
+
+      app.appendChild(card);
+    }
+
+    /* 畫面 1：選作家 */
+    function showArtists() {
+      app.innerHTML = "";
+      const card = document.createElement("div"); card.className = "card";
+      card.appendChild(backBar("← " + SITE_DATA.siteTitle, showHome));
+
+      const list = document.createElement("div"); list.className = "options";
+      SITE_DATA.artists.forEach(a => {
+        list.appendChild(optionButton(a.name.JA, "›", () => showLanguages(a.id)));
+      });
+      card.appendChild(list);
+      app.appendChild(card);
+    }
+
+    /* 畫面 2：選語言 */
+    function showLanguages(artistId) {
+      const artist = getArtist(artistId);
+      app.innerHTML = "";
+      const card = document.createElement("div"); card.className = "card";
+      card.appendChild(backBar("← " + SITE_DATA.siteTitle, showArtists));
+
+      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA;
+      const s = document.createElement("p"); s.className = "page-sub"; s.textContent = "言語  /  Language";
+      card.appendChild(h); card.appendChild(s);
+
+      const grid = document.createElement("div"); grid.className = "lang-grid";
+      LANGS.forEach(lang => {
+        grid.appendChild(optionButton(LANG_LABEL[lang], "", () => showSections(artistId, lang)));
+      });
+      card.appendChild(grid);
+      app.appendChild(card);
+    }
+
+    /* 畫面 3：選「作家介紹 / 作品介紹」 */
+    function showSections(artistId, lang) {
+      const artist = getArtist(artistId);
+      const ui = UI[lang];
+      app.innerHTML = "";
+      const card = document.createElement("div"); card.className = "card";
+      card.appendChild(backBar(ui.back, () => showLanguages(artistId)));
+
+      const h = document.createElement("h2"); h.className = "page-title";
+      h.textContent = artist.name[lang];
+      const s = document.createElement("p"); s.className = "page-sub";
+      s.textContent = LANG_LABEL[lang] + "  ·  " + ui.pickSection;
+      card.appendChild(h); card.appendChild(s);
+
+      const list = document.createElement("div"); list.className = "options";
+      list.appendChild(optionButton(ui.artistIntro, "›", () => showArtistIntro(artistId, lang)));
+      list.appendChild(optionButton(ui.worksIntro, "›", () => showWorks(artistId, lang)));
+      card.appendChild(list);
+      app.appendChild(card);
+    }
+
+    /* 畫面 4a：作家介紹（單一影片） */
+    function showArtistIntro(artistId, lang) {
+      const artist = getArtist(artistId);
+      const ui = UI[lang];
+      app.innerHTML = "";
+      const card = document.createElement("div"); card.className = "card";
+      card.appendChild(backBar(ui.back, () => showSections(artistId, lang)));
+
+      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = ui.artistIntro;
+      const s = document.createElement("p"); s.className = "page-sub";
+      s.textContent = artist.name[lang] + "  ·  " + LANG_LABEL[lang];
+      card.appendChild(h); card.appendChild(s);
+
+      const url = artist.intro[lang];
+      const a = document.createElement("a"); a.className = "watch-big";
+      if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = ui.watch + "  (YouTube)"; }
+      else { a.className += " pending"; a.textContent = ui.pending; }
+      card.appendChild(a);
+      app.appendChild(card);
+    }
+
+    /* 畫面 4b：作品介紹（清單 → 點擊跳 YouTube） */
+    function showWorks(artistId, lang) {
+      const artist = getArtist(artistId);
+      const ui = UI[lang];
+      app.innerHTML = "";
+      const card = document.createElement("div"); card.className = "card";
+      card.appendChild(backBar(ui.back, () => showSections(artistId, lang)));
+
+      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = ui.worksIntro;
+      const s = document.createElement("p"); s.className = "page-sub";
+      s.textContent = artist.name[lang] + "  ·  " + LANG_LABEL[lang];
+      card.appendChild(h); card.appendChild(s);
+
+      const list = document.createElement("div"); list.className = "options";
+      artist.works.forEach(work => {
+        const url = work.url[lang];
+        if (url) {
+          const a = document.createElement("a");
+          a.className = "btn"; a.href = url; a.target = "_blank"; a.rel = "noopener";
+          const l = document.createElement("span"); l.textContent = work.name[lang];
+          const m = document.createElement("span"); m.className = "meta"; m.textContent = "▶ YouTube";
+          a.appendChild(l); a.appendChild(m);
+          list.appendChild(a);
+        } else {
+          const d = document.createElement("div"); d.className = "btn pending";
+          const l = document.createElement("span"); l.textContent = work.name[lang];
+          const m = document.createElement("span"); m.className = "meta"; m.textContent = ui.pending;
+          d.appendChild(l); d.appendChild(m);
+          list.appendChild(d);
+        }
+      });
+      card.appendChild(list);
+      app.appendChild(card);
+    }
+
+    /* 啟動 */
+    showHome();
+  </script>
+</body>
+</html>
