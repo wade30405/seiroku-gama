@@ -477,7 +477,7 @@
     function showArtists() {
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
-      card.appendChild(backBar(UI.JA.back, showHome));
+      card.appendChild(backBar("← 戻る / Back", showHome));
       const list = document.createElement("div"); list.className = "options";
       SITE_DATA.artists.forEach(a => {
         list.appendChild(optionButton(a.name.JA, "›", () => showLanguages(a.id)));
@@ -492,7 +492,7 @@
       const artist = getArtist(artistId);
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
-      card.appendChild(backBar(UI.JA.back, showArtists));
+      card.appendChild(backBar("← 戻る / Back", showArtists));
       const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA;
       const s = document.createElement("p"); s.className = "page-sub"; s.textContent = "言語  /  Language";
       card.appendChild(h); card.appendChild(s);
