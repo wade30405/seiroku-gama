@@ -507,7 +507,7 @@
       card.appendChild(h); card.appendChild(s);
       const url = artist.intro[lang];
       const a = document.createElement("a"); a.className = "watch-big";
-      if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = ui.watch + "  (YouTube)"; pulseOnClick(a); }
+      if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = ui.watch; pulseOnClick(a); }
       else { a.className += " pending"; a.textContent = ui.pending; }
       card.appendChild(a);
       app.appendChild(card);
@@ -532,7 +532,7 @@
           const a = document.createElement("a");
           a.className = "btn"; a.href = url; a.target = "_blank"; a.rel = "noopener";
           const l = document.createElement("span"); l.textContent = work.name[lang];
-          const m = document.createElement("span"); m.className = "meta"; m.textContent = "▶ YouTube";
+          const m = document.createElement("span"); m.className = "meta"; m.textContent = "▶";
           a.appendChild(l); a.appendChild(m);
           pulseOnClick(a);
           list.appendChild(a);
