@@ -36,12 +36,12 @@ const SITE_DATA = {
         EN: "Nakamura Seigo"
       },
 
-      // ★ 作家介紹影片（四語各一支）— 尚未提供
+      // ★ 作家介紹影片（四語各一支）
       intro: {
-        JA: "",
-        ZH: "",
-        KO: "",
-        EN: ""
+        JA: "https://www.youtube.com/shorts/AudRbBnqCI0",
+        ZH: "https://www.youtube.com/shorts/Td7GI_3q_Sg",
+        KO: "https://www.youtube.com/shorts/ykxL_f_G4E0",
+        EN: "https://www.youtube.com/shorts/3Z-C_iAap9g"
       },
 
       // ★ 作品介紹（共 10 件，No.1–9 已填，No.10 待補）

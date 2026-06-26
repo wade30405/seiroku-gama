@@ -17,10 +17,10 @@
       --bg2:       #eceae2;
       --card:      #ffffff;
       --card-hi:   #fbfaf6;
-      --ink:       #2c2822;            /* 溫潤的近黑 */
+      --ink:       #2c2822;
       --title:     #211d18;
       --muted:     #8a8378;
-      --gold:      #9a7b3c;            /* 白底上用較深的金，才看得清 */
+      --gold:      #9a7b3c;
       --gold-soft: rgba(154,123,60,0.45);
       --gold-faint:rgba(154,123,60,0.12);
       --line:      rgba(40,36,30,0.12);
@@ -38,10 +38,10 @@
       --bg2:       #15171b;
       --card:      #17191e;
       --card-hi:   #1d2026;
-      --ink:       #ece7dd;            /* 溫潤的瓷白 */
+      --ink:       #ece7dd;
       --title:     #f3efe7;
       --muted:     #8b8579;
-      --gold:      #c6a15b;            /* 黑底上用較亮的金 */
+      --gold:      #c6a15b;
       --gold-soft: rgba(198,161,91,0.38);
       --gold-faint:rgba(198,161,91,0.14);
       --line:      rgba(236,231,221,0.09);
@@ -57,7 +57,6 @@
       min-height: 100vh;
       font-family: var(--serif);
       color: var(--ink);
-      /* 放射狀漸層 → 聚光燈 / 展櫃打光 */
       background:
         radial-gradient(ellipse 80% 60% at 50% 18%, var(--grad1) 0%, var(--grad2) 62%);
       background-attachment: fixed;
@@ -72,28 +71,25 @@
 
     #app { width: 100%; max-width: 600px; }
 
-    .card { padding: 8px 6px; animation: rise 0.45s ease both; }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    .card { padding: 8px 6px; }
 
     /* ---------- 首頁 ---------- */
     .site-title {
       font-size: 3rem;
       font-weight: 500;
       letter-spacing: 0.42em;
-      padding-left: 0.42em;          /* 補回字距造成的右偏 */
+      padding-left: 0.42em;
       text-align: center;
       margin: 8px 0 0;
       color: var(--title);
     }
-    .site-title::after {
-      content: "";
+    .title-char { display: inline-block; will-change: transform, opacity; }
+    .title-rule {
       display: block;
       width: 56px; height: 1px;
       margin: 24px auto 0;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transform-origin: center;
     }
     .tagline {
       text-align: center;
@@ -101,16 +97,15 @@
       letter-spacing: 0.12em;
       font-size: 0.86rem;
       line-height: 2.05;
-      white-space: pre-line;          /* 讓資料中的 \n 真正換行 */
       margin: 24px 0 0;
     }
-    /* 第一行（窯元・所在地）略微提亮，作為小標 */
     .tagline-lead {
       display: block;
       color: var(--ink);
       letter-spacing: 0.16em;
       margin-bottom: 6px;
     }
+    .tagline-line { display: block; }
 
     /* ---------- 內頁標題 ---------- */
     .page-title {
@@ -198,7 +193,8 @@
       border: 1px solid var(--gold-soft); border-radius: 50%;
       background: transparent; color: var(--gold);
       font-size: 1.1rem; cursor: pointer;
-      padding-left: 4px;             /* ▶ 視覺置中 */
+      padding-left: 4px;
+      will-change: transform;
       transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
     }
     .start-btn:hover {
@@ -242,14 +238,10 @@
     }
     #theme-toggle:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
 
-    /* ===========================================================
-       手機專用微調（螢幕寬度 ≤ 480px 時套用）
-       電腦／平板維持原樣，手機則縮小標題、收窄邊距、按鈕更緊湊
-       =========================================================== */
     @media (max-width: 480px) {
       body { padding: 40px 16px 72px; }
       .site-title { font-size: 2.2rem; letter-spacing: 0.3em; padding-left: 0.3em; }
-      .site-title::after { margin-top: 20px; }
+      .title-rule { margin-top: 20px; }
       .tagline { font-size: 0.76rem; letter-spacing: 0.18em; }
       .page-title { font-size: 1.35rem; }
       .page-sub { font-size: 0.76rem; margin-bottom: 24px; }
@@ -267,9 +259,16 @@
   <!-- 資料檔：所有作家、作品、連結都在這裡 -->
   <script src="data.js"></script>
 
+  <!-- anime.js v4（ESM）：載入後設為全域並通知主程式 -->
+  <script type="module">
+    import { animate, stagger } from 'https://esm.sh/animejs';
+    window.AJS = { animate, stagger };
+    document.dispatchEvent(new Event('anime-ready'));
+  </script>
+
   <script>
     /* =========================================================
-       多語介面文字（依使用者選的語言切換）
+       多語介面文字
        ========================================================= */
     const LANGS = ["JA", "ZH", "KO", "EN"];
     const LANG_LABEL = { JA: "日本語", ZH: "中文", KO: "한국어", EN: "English" };
@@ -290,17 +289,16 @@
     };
 
     /* =========================================================
-       日／夜模式切換（記憶使用者選擇）
+       日／夜模式切換
        ========================================================= */
     const THEME_KEY = "seiroku-theme";
     function applyTheme(theme) {
       document.documentElement.setAttribute("data-theme", theme);
       const btn = document.getElementById("theme-toggle");
-      // 夜間時顯示「太陽」(可切回白天)，日間時顯示「月亮」(可切到夜晚)
       if (btn) btn.textContent = theme === "dark" ? "☀" : "☾";
     }
     (function initTheme() {
-      const saved = localStorage.getItem(THEME_KEY) || "light";   // 預設白底
+      const saved = localStorage.getItem(THEME_KEY) || "light";
       applyTheme(saved);
     })();
     document.getElementById("theme-toggle").addEventListener("click", () => {
@@ -309,6 +307,40 @@
       localStorage.setItem(THEME_KEY, next);
       applyTheme(next);
     });
+
+    /* =========================================================
+       動畫工具（anime.js 未就緒 / 使用者要求減少動態 → 自動略過）
+       ========================================================= */
+    window.__reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function canAnimate() { return !!window.AJS && !window.__reduceMotion; }
+
+    // 內頁通用：標題、副標、按鈕依序錯落浮入
+    function enterScreen(card) {
+      if (!canAnimate()) return;
+      const { animate, stagger } = window.AJS;
+      const targets = card.querySelectorAll(".backbar, .page-title, .page-sub, .btn, .watch-big");
+      targets.forEach(el => { el.style.opacity = 0; });
+      animate(targets, { opacity: [0, 1], y: [12, 0], duration: 560, ease: "out(3)", delay: stagger(60) });
+    }
+
+    // 點擊回饋：按下時輕微縮放，再執行動作
+    function pressThen(el, fn) {
+      return () => {
+        if (canAnimate()) {
+          window.AJS.animate(el, { scale: [1, 0.95, 1], duration: 240, ease: "out(2)" });
+          setTimeout(fn, 140);
+        } else {
+          fn();
+        }
+      };
+    }
+
+    // 連結（開新分頁，頁面不離開）→ 點擊時輕脈動
+    function pulseOnClick(el) {
+      el.addEventListener("click", () => {
+        if (canAnimate()) window.AJS.animate(el, { scale: [1, 0.97, 1], duration: 240, ease: "out(2)" });
+      });
+    }
 
     const app = document.getElementById("app");
     const getArtist = (id) => SITE_DATA.artists.find(a => a.id === id);
@@ -319,37 +351,52 @@
       const l = document.createElement("span"); l.textContent = label;
       b.appendChild(l);
       if (meta) { const m = document.createElement("span"); m.className = "meta"; m.textContent = meta; b.appendChild(m); }
-      b.onclick = onClick;
+      b.onclick = pressThen(b, onClick);
       return b;
     }
 
     function backBar(label, onClick) {
       const bar = document.createElement("div"); bar.className = "backbar";
       const btn = document.createElement("button"); btn.className = "back-btn";
-      btn.textContent = label; btn.onclick = onClick;
+      btn.textContent = label; btn.onclick = pressThen(btn, onClick);
       bar.appendChild(btn);
       return bar;
     }
 
-    /* 畫面 0：首頁 */
+    /* 畫面 0：首頁（開場儀式） */
     function showHome() {
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card center";
 
-      const h = document.createElement("h1"); h.className = "site-title"; h.textContent = SITE_DATA.siteTitle;
+      // 標題逐字
+      const h = document.createElement("h1"); h.className = "site-title";
+      const chars = [];
+      [...SITE_DATA.siteTitle].forEach(ch => {
+        const span = document.createElement("span");
+        span.className = "title-char"; span.textContent = ch;
+        h.appendChild(span); chars.push(span);
+      });
       card.appendChild(h);
+
+      // 金線
+      const rule = document.createElement("span"); rule.className = "title-rule";
+      card.appendChild(rule);
+
+      // 標語（逐行）
+      const lineEls = [];
       if (SITE_DATA.tagline) {
         const t = document.createElement("p"); t.className = "tagline";
-        const lines = SITE_DATA.tagline.split("\n");
-        const lead = document.createElement("span");
-        lead.className = "tagline-lead";
-        lead.textContent = lines[0];
-        t.appendChild(lead);
-        t.appendChild(document.createTextNode(lines.slice(1).join("\n")));
+        SITE_DATA.tagline.split("\n").forEach((ln, i) => {
+          const el = document.createElement("span");
+          el.className = i === 0 ? "tagline-lead" : "tagline-line";
+          el.textContent = ln;
+          t.appendChild(el); lineEls.push(el);
+        });
         card.appendChild(t);
       }
 
-      // 首頁外部連結（官網、Instagram）
+      // 外部連結
+      const tail = [];
       const links = [
         { url: SITE_DATA.website, label: "公式サイト" },
         { url: SITE_DATA.instagram, label: "Instagram" }
@@ -360,20 +407,40 @@
           const a = document.createElement("a");
           a.className = "ig-link"; a.href = x.url;
           a.target = "_blank"; a.rel = "noopener"; a.textContent = x.label;
+          pulseOnClick(a);
           row.appendChild(a);
         });
-        card.appendChild(row);
+        card.appendChild(row); tail.push(row);
       }
 
+      // 進入鈕
       const startWrap = document.createElement("div");
       const start = document.createElement("button");
       start.className = "start-btn"; start.textContent = "▶";
       start.setAttribute("aria-label", "enter");
-      start.onclick = showArtists;
+      start.onclick = pressThen(start, showArtists);
       startWrap.appendChild(start);
-      card.appendChild(startWrap);
+      card.appendChild(startWrap); tail.push(startWrap);
 
       app.appendChild(card);
+
+      playHome(chars, rule, lineEls, tail);
+    }
+
+    // 開場序列：逐字浮現 → 金線展開 → 標語逐行 → 連結/進入鈕 → 進入鈕呼吸
+    function playHome(chars, rule, lines, tail) {
+      if (!canAnimate()) return;
+      const { animate, stagger } = window.AJS;
+      [...chars, rule, ...lines, ...tail].forEach(el => { if (el) el.style.opacity = 0; });
+      rule.style.transform = "scaleX(0)";
+
+      animate(chars, { opacity: [0, 1], y: [30, 0], duration: 850, ease: "out(3)", delay: stagger(70, { start: 120 }) });
+      animate(rule,  { opacity: [0, 1], scaleX: [0, 1], duration: 700, ease: "out(3)", delay: 620 });
+      animate(lines, { opacity: [0, 1], y: [14, 0], duration: 650, ease: "out(3)", delay: stagger(130, { start: 780 }) });
+      if (tail.length) animate(tail, { opacity: [0, 1], y: [12, 0], duration: 650, ease: "out(3)", delay: stagger(140, { start: 1180 }) });
+
+      const start = document.querySelector(".start-btn");
+      if (start) animate(start, { scale: [1, 1.08], duration: 1700, ease: "inOut(2)", loop: true, alternate: true, delay: 1700 });
     }
 
     /* 畫面 1：選作家 */
@@ -381,13 +448,13 @@
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
       card.appendChild(backBar("← " + SITE_DATA.siteTitle, showHome));
-
       const list = document.createElement("div"); list.className = "options";
       SITE_DATA.artists.forEach(a => {
         list.appendChild(optionButton(a.name.JA, "›", () => showLanguages(a.id)));
       });
       card.appendChild(list);
       app.appendChild(card);
+      enterScreen(card);
     }
 
     /* 畫面 2：選語言 */
@@ -396,17 +463,16 @@
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
       card.appendChild(backBar("← " + SITE_DATA.siteTitle, showArtists));
-
       const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA;
       const s = document.createElement("p"); s.className = "page-sub"; s.textContent = "言語  /  Language";
       card.appendChild(h); card.appendChild(s);
-
       const grid = document.createElement("div"); grid.className = "lang-grid";
       LANGS.forEach(lang => {
         grid.appendChild(optionButton(LANG_LABEL[lang], "", () => showSections(artistId, lang)));
       });
       card.appendChild(grid);
       app.appendChild(card);
+      enterScreen(card);
     }
 
     /* 畫面 3：選「作家介紹 / 作品介紹」 */
@@ -416,54 +482,49 @@
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
       card.appendChild(backBar(ui.back, () => showLanguages(artistId)));
-
-      const h = document.createElement("h2"); h.className = "page-title";
-      h.textContent = artist.name[lang];
+      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name[lang];
       const s = document.createElement("p"); s.className = "page-sub";
       s.textContent = LANG_LABEL[lang] + "  ·  " + ui.pickSection;
       card.appendChild(h); card.appendChild(s);
-
       const list = document.createElement("div"); list.className = "options";
       list.appendChild(optionButton(ui.artistIntro, "›", () => showArtistIntro(artistId, lang)));
       list.appendChild(optionButton(ui.worksIntro, "›", () => showWorks(artistId, lang)));
       card.appendChild(list);
       app.appendChild(card);
+      enterScreen(card);
     }
 
-    /* 畫面 4a：作家介紹（單一影片） */
+    /* 畫面 4a：作家介紹 */
     function showArtistIntro(artistId, lang) {
       const artist = getArtist(artistId);
       const ui = UI[lang];
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
       card.appendChild(backBar(ui.back, () => showSections(artistId, lang)));
-
       const h = document.createElement("h2"); h.className = "page-title"; h.textContent = ui.artistIntro;
       const s = document.createElement("p"); s.className = "page-sub";
       s.textContent = artist.name[lang] + "  ·  " + LANG_LABEL[lang];
       card.appendChild(h); card.appendChild(s);
-
       const url = artist.intro[lang];
       const a = document.createElement("a"); a.className = "watch-big";
-      if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = ui.watch + "  (YouTube)"; }
+      if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = ui.watch + "  (YouTube)"; pulseOnClick(a); }
       else { a.className += " pending"; a.textContent = ui.pending; }
       card.appendChild(a);
       app.appendChild(card);
+      enterScreen(card);
     }
 
-    /* 畫面 4b：作品介紹（清單 → 點擊跳 YouTube） */
+    /* 畫面 4b：作品介紹 */
     function showWorks(artistId, lang) {
       const artist = getArtist(artistId);
       const ui = UI[lang];
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
       card.appendChild(backBar(ui.back, () => showSections(artistId, lang)));
-
       const h = document.createElement("h2"); h.className = "page-title"; h.textContent = ui.worksIntro;
       const s = document.createElement("p"); s.className = "page-sub";
       s.textContent = artist.name[lang] + "  ·  " + LANG_LABEL[lang];
       card.appendChild(h); card.appendChild(s);
-
       const list = document.createElement("div"); list.className = "options";
       artist.works.forEach(work => {
         const url = work.url[lang];
@@ -473,6 +534,7 @@
           const l = document.createElement("span"); l.textContent = work.name[lang];
           const m = document.createElement("span"); m.className = "meta"; m.textContent = "▶ YouTube";
           a.appendChild(l); a.appendChild(m);
+          pulseOnClick(a);
           list.appendChild(a);
         } else {
           const d = document.createElement("div"); d.className = "btn pending";
@@ -484,10 +546,14 @@
       });
       card.appendChild(list);
       app.appendChild(card);
+      enterScreen(card);
     }
 
-    /* 啟動 */
-    showHome();
+    /* 啟動：等 anime.js 就緒後再渲染；2 秒內沒就緒則直接渲染（無動畫保底） */
+    let __started = false;
+    function startApp() { if (__started) return; __started = true; showHome(); }
+    document.addEventListener("anime-ready", startApp);
+    setTimeout(startApp, 2000);
   </script>
 </body>
 </html>
