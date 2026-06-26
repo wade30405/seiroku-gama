@@ -13,8 +13,8 @@
    ※ 留空 "" 的連結，網頁上會自動顯示「準備中」，不會壞掉。
 
    更新狀態（2026-06-26）：
-     ・作品影片：中村清吾 No.1–9、中村美穂 No.1–6 已全部填入
-     ・尚缺：中村清吾 No.10（大）作品影片、兩位作家的「作家介紹」影片
+     ・作品影片：中村清吾 No.1–10、中村美穂 No.1–6 已全部填入
+     ・尚缺：中村美穂的「作家介紹」影片
    ======================================================================= */
 
 const SITE_DATA = {
@@ -139,7 +139,12 @@ const SITE_DATA = {
         {
           no: 10,
           name: { JA: "白磁松竹梅三角湯呑み(大)", ZH: "白瓷松竹梅三角大汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (대)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Large)" },
-          url:  { JA: "", ZH: "", KO: "", EN: "" }
+          url:  {
+            JA: "https://www.youtube.com/watch?v=2v-BYMUP5Ng",
+            ZH: "https://www.youtube.com/watch?v=k4bfiEyY5c8",
+            KO: "https://www.youtube.com/watch?v=n1fG_sYKUdA",
+            EN: "https://www.youtube.com/watch?v=2R2FcW-_0T8"
+          }
         }
       ]
     },
