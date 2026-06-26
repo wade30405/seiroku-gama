@@ -174,10 +174,15 @@
       letter-spacing: 0.16em;
     }
 
-    /* ---------- Instagram ---------- */
+    /* ---------- 首頁外部連結（Instagram・官網） ---------- */
+    .home-links {
+      display: flex; gap: 12px;
+      justify-content: center; flex-wrap: wrap;
+      margin-top: 28px;
+    }
     .ig-link {
       display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 26px; padding: 11px 26px;
+      padding: 11px 26px;
       border: 1px solid var(--gold-soft); border-radius: 999px;
       color: var(--gold); text-decoration: none;
       font-size: 0.82rem; letter-spacing: 0.18em;
@@ -344,12 +349,20 @@
         card.appendChild(t);
       }
 
-      if (SITE_DATA.instagram) {
-        const wrap = document.createElement("div");
-        const ig = document.createElement("a");
-        ig.className = "ig-link"; ig.href = SITE_DATA.instagram;
-        ig.target = "_blank"; ig.rel = "noopener"; ig.textContent = "Instagram";
-        wrap.appendChild(ig); card.appendChild(wrap);
+      // 首頁外部連結（官網、Instagram）
+      const links = [
+        { url: SITE_DATA.website, label: "公式サイト" },
+        { url: SITE_DATA.instagram, label: "Instagram" }
+      ].filter(x => x.url);
+      if (links.length) {
+        const row = document.createElement("div"); row.className = "home-links";
+        links.forEach(x => {
+          const a = document.createElement("a");
+          a.className = "ig-link"; a.href = x.url;
+          a.target = "_blank"; a.rel = "noopener"; a.textContent = x.label;
+          row.appendChild(a);
+        });
+        card.appendChild(row);
       }
 
       const startWrap = document.createElement("div");

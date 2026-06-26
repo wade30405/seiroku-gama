@@ -21,8 +21,9 @@ const SITE_DATA = {
   siteTitle: "清六窯",
   tagline: "佐賀・有田｜白磁の窯元\n昭和41年開窯\n白磁の曲線美を受け継ぎ、今へ\n中村清吾の制作と\n窯の日々を家族の視点で綴っています",
 
-  // ★ 首頁的 Instagram 連結（晚點貼）
-  instagram: "",
+  // ★ 首頁的外部連結
+  instagram: "https://www.instagram.com/seirokugama/",
+  website: "https://seirokugama.jp/",
 
   artists: [
     /* ===================== 中村清吾（器皿・全10件） ===================== */
