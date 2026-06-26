@@ -238,6 +238,19 @@
     }
     #theme-toggle:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
 
+    /* ---------- 回到首頁鈕（固定左上角，首頁時隱藏） ---------- */
+    #home-btn {
+      position: fixed; top: 18px; left: 18px; z-index: 20;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--gold-soft); background: var(--card);
+      color: var(--gold); cursor: pointer;
+      box-shadow: 0 4px 16px var(--shadow);
+      transition: background .25s ease, box-shadow .25s ease, border-color .25s ease, opacity .3s ease, transform .3s ease;
+    }
+    #home-btn:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
+    #home-btn.hidden { opacity: 0; transform: scale(0.8); pointer-events: none; }
+
     @media (max-width: 480px) {
       body { padding: 40px 16px 72px; }
       .site-title { font-size: 2.2rem; letter-spacing: 0.3em; padding-left: 0.3em; }
@@ -254,6 +267,13 @@
 
 <body>
   <button id="theme-toggle" aria-label="切換日間／夜間模式" title="切換日間／夜間"></button>
+  <button id="home-btn" class="hidden" aria-label="回到首頁" title="回到首頁">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11.5 12 4l9 7.5" />
+      <path d="M5 10v9h5v-6h4v6h5v-9" />
+    </svg>
+  </button>
   <div id="app"></div>
 
   <!-- 資料檔：所有作家、作品、連結都在這裡 -->
@@ -316,6 +336,7 @@
 
     // 內頁通用：標題、副標、按鈕依序錯落浮入
     function enterScreen(card) {
+      document.getElementById("home-btn").classList.remove("hidden");   // 內頁顯示回首頁鈕
       if (!canAnimate()) return;
       const { animate, stagger } = window.AJS;
       const targets = card.querySelectorAll(".backbar, .page-title, .page-sub, .btn, .watch-big");
@@ -365,6 +386,7 @@
 
     /* 畫面 0：首頁（開場儀式） */
     function showHome() {
+      document.getElementById("home-btn").classList.add("hidden");      // 首頁時隱藏回首頁鈕
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card center";
 
@@ -550,6 +572,9 @@
     }
 
     /* 啟動：等 anime.js 就緒後再渲染；2 秒內沒就緒則直接渲染（無動畫保底） */
+    // 回到首頁鈕：點擊回首頁（含按壓回饋）
+    document.getElementById("home-btn").onclick = pressThen(document.getElementById("home-btn"), showHome);
+
     let __started = false;
     function startApp() { if (__started) return; __started = true; showHome(); }
     document.addEventListener("anime-ready", startApp);
