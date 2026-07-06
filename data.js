@@ -12,9 +12,10 @@
    語言代碼：JA=日本語  ZH=中文  KO=한국어  EN=English
    ※ 留空 "" 的連結，網頁上會自動顯示「準備中」，不會壞掉。
 
-   更新狀態（2026-06-26）：
+   更新狀態（2026-07-06）：
      ・作品影片：中村清吾 No.1–10、中村美穂 No.1–6 已全部填入
-     ・尚缺：中村美穂的「作家介紹」影片
+     ・作家介紹：中村清吾、中村美穂 四語皆已填入
+     ・中村清吾 No.9（JA）：YouTube 端仍處理中，連結已先行放入
    ======================================================================= */
 
 const SITE_DATA = {
@@ -38,10 +39,10 @@ const SITE_DATA = {
 
       // ★ 作家介紹影片（四語各一支）
       intro: {
-        JA: "https://www.youtube.com/shorts/AudRbBnqCI0",
-        ZH: "https://www.youtube.com/shorts/Td7GI_3q_Sg",
-        KO: "https://www.youtube.com/shorts/ykxL_f_G4E0",
-        EN: "https://www.youtube.com/shorts/3Z-C_iAap9g"
+        JA: "https://www.youtube.com/shorts/UwzD42PRmNM",
+        ZH: "https://www.youtube.com/shorts/XBcLm_ch8Ak",
+        KO: "https://www.youtube.com/shorts/voyJlgiU9Qs",
+        EN: "https://www.youtube.com/shorts/Uhe_ZQj72pE"
       },
 
       // ★ 作品介紹（共 10 件，No.1–9 已填，No.10 待補）
@@ -50,100 +51,100 @@ const SITE_DATA = {
           no: 1,
           name: { JA: "白磁壺Ⅰ", ZH: "白瓷罐Ⅰ", KO: "백자 항아리 Ⅰ", EN: "White Porcelain Jar Ⅰ" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=bsQt-lho6PM",
+            JA: "https://www.youtube.com/watch?v=4efv65Jea2E",
             ZH: "https://www.youtube.com/watch?v=K48nKAjEq84",
             KO: "https://www.youtube.com/watch?v=-JFymFtOh3g",
-            EN: "https://www.youtube.com/watch?v=acY7YVkC0K0"
+            EN: "https://www.youtube.com/watch?v=gVnUpgwR_RA"
           }
         },
         {
           no: 2,
           name: { JA: "白磁壺Ⅱ", ZH: "白瓷罐Ⅱ", KO: "백자 항아리 Ⅱ", EN: "White Porcelain Jar Ⅱ" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=CzA8LWIDXXs",
+            JA: "https://www.youtube.com/shorts/94DIzd24iSE",
             ZH: "https://www.youtube.com/watch?v=EftF08J3nto",
             KO: "https://www.youtube.com/watch?v=K2RqaC4eXRg",
-            EN: "https://www.youtube.com/watch?v=F5G4BDHj7rI"
+            EN: "https://www.youtube.com/shorts/wM6OUCSSMJw"
           }
         },
         {
           no: 3,
           name: { JA: "白磁香炉", ZH: "白瓷香炉", KO: "백자 향로", EN: "White Porcelain Incense Burner" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=HPEzq1xW9_k",
+            JA: "https://www.youtube.com/watch?v=YCM84VPItTA",
             ZH: "https://www.youtube.com/watch?v=gqSDdNtAoJs",
             KO: "https://www.youtube.com/watch?v=kmjokRhGwVc",
-            EN: "https://www.youtube.com/watch?v=QY0tzUz28_c"
+            EN: "https://www.youtube.com/watch?v=1NYlqu0RnX4"
           }
         },
         {
           no: 4,
           name: { JA: "白磁花入", ZH: "白瓷花瓶", KO: "백자 화병", EN: "White Porcelain Flower Vessel" },
           url:  {
-            JA: "https://www.youtube.com/shorts/9vzOzUvFllg",
+            JA: "https://www.youtube.com/shorts/z7f36YuCtAY",
             ZH: "https://www.youtube.com/shorts/7dRZdDaPJnY",
             KO: "https://www.youtube.com/shorts/H3d4sQQKo7U",
-            EN: "https://www.youtube.com/shorts/umKQlN5aYz4"
+            EN: "https://www.youtube.com/shorts/0UknpA4yMUE"
           }
         },
         {
           no: 5,
           name: { JA: "白磁珈琲碗", ZH: "白瓷咖啡杯", KO: "백자 커피잔", EN: "White Porcelain Coffee Cup" },
           url:  {
-            JA: "https://www.youtube.com/shorts/TltDykM7K6g",
+            JA: "https://www.youtube.com/shorts/Vi32BJtXIEc",
             ZH: "https://www.youtube.com/shorts/vrCUkdXxU0s",
             KO: "https://www.youtube.com/shorts/1wDfaWHR3jY",
-            EN: "https://www.youtube.com/shorts/AlnJmyRCbYE"
+            EN: "https://www.youtube.com/shorts/zx9IE-8iD6U"
           }
         },
         {
           no: 6,
           name: { JA: "白磁紅茶碗", ZH: "白瓷红茶杯", KO: "백자 홍차잔", EN: "White Porcelain Teacup" },
           url:  {
-            JA: "https://www.youtube.com/shorts/kF8p_uSnvKI",
+            JA: "https://www.youtube.com/shorts/j-0WIedLiuo",
             ZH: "https://www.youtube.com/shorts/Wboum1chJP8",
             KO: "https://www.youtube.com/shorts/veW1E6IbQTk",
-            EN: "https://www.youtube.com/shorts/DrOQ6qEQyks"
+            EN: "https://www.youtube.com/shorts/ry6iQHTLFBg"
           }
         },
         {
           no: 7,
           name: { JA: "白磁茶器", ZH: "白瓷茶具", KO: "백자 다기 세트", EN: "White Porcelain Tea Vessel" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=Wk9Ugzr53g0",
+            JA: "https://www.youtube.com/watch?v=OsY7i3LokQM",
             ZH: "https://www.youtube.com/watch?v=NNSY-wSbVck",
             KO: "https://www.youtube.com/watch?v=drh9-OUpKsM",
-            EN: "https://www.youtube.com/watch?v=roZNii0PNsc"
+            EN: "https://www.youtube.com/watch?v=2GOqg-4zqDU"
           }
         },
         {
           no: 8,
           name: { JA: "白磁酒器セット", ZH: "白瓷酒具套装", KO: "백자 주기(술기) 세트", EN: "Set of White Porcelain Sake Vessels" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=kn_qr68Z5Ko",
+            JA: "https://www.youtube.com/watch?v=6hStTbpSrTo",
             ZH: "https://www.youtube.com/watch?v=9JFCz1x3la0",
             KO: "https://www.youtube.com/watch?v=MFqPtz5NIRA",
-            EN: "https://www.youtube.com/watch?v=rLaqpdw4zXI"
+            EN: "https://www.youtube.com/watch?v=MbVkaE59uzE"
           }
         },
         {
           no: 9,
           name: { JA: "白磁松竹梅三角湯呑み(小)", ZH: "白瓷松竹梅三角小汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (소)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Small)" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=14JeuRI_f2E",
+            JA: "https://www.youtube.com/watch?v=VCAf7H03_dQ",
             ZH: "https://www.youtube.com/watch?v=cpGlREz82-o",
             KO: "https://www.youtube.com/watch?v=U-uF0eDJz20",
-            EN: "https://www.youtube.com/watch?v=1TkAq4W9wWQ"
+            EN: "https://www.youtube.com/watch?v=P8Jb2dh2i5I"
           }
         },
         {
           no: 10,
           name: { JA: "白磁松竹梅三角湯呑み(大)", ZH: "白瓷松竹梅三角大汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (대)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Large)" },
           url:  {
-            JA: "https://www.youtube.com/watch?v=2v-BYMUP5Ng",
+            JA: "https://www.youtube.com/watch?v=E3rlkb3U-5Q",
             ZH: "https://www.youtube.com/watch?v=k4bfiEyY5c8",
             KO: "https://www.youtube.com/watch?v=n1fG_sYKUdA",
-            EN: "https://www.youtube.com/watch?v=2R2FcW-_0T8"
+            EN: "https://www.youtube.com/watch?v=ScT3-GlnOFQ"
           }
         }
       ]
@@ -159,12 +160,12 @@ const SITE_DATA = {
         EN: "Nakamura Miho"
       },
 
-      // ★ 作家介紹影片（四語各一支）— 尚未提供
+      // ★ 作家介紹影片（四語各一支）
       intro: {
-        JA: "",
-        ZH: "",
-        KO: "",
-        EN: ""
+        JA: "https://www.youtube.com/shorts/-s2OlGmAYg0",
+        ZH: "https://www.youtube.com/shorts/hmQdsHQbJu4",
+        KO: "https://www.youtube.com/shorts/5ntyfrdlwyI",
+        EN: "https://www.youtube.com/shorts/7DmALjk5j6A"
       },
 
       works: [
