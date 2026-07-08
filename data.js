@@ -61,10 +61,10 @@ const SITE_DATA = {
           no: 2,
           name: { JA: "白磁壺Ⅱ", ZH: "白瓷罐Ⅱ", KO: "백자 항아리 Ⅱ", EN: "White Porcelain Jar Ⅱ" },
           url:  {
-            JA: "https://www.youtube.com/shorts/94DIzd24iSE",
-            ZH: "https://www.youtube.com/shorts/FLJezuWNXco",
-            KO: "https://www.youtube.com/shorts/fCUvCQPYIH4",
-            EN: "https://www.youtube.com/shorts/wM6OUCSSMJw"
+            JA: "https://www.youtube.com/watch?v=3jekIG9nh3k",
+            ZH: "https://www.youtube.com/watch?v=9i_MCIYGuTk",
+            KO: "https://www.youtube.com/watch?v=v66oWU8UCG4",
+            EN: "https://www.youtube.com/watch?v=u63a-G0ghYk"
           }
         },
         {
