@@ -12,10 +12,10 @@
    語言代碼：JA=日本語  ZH=中文  KO=한국어  EN=English
    ※ 留空 "" 的連結，網頁上會自動顯示「準備中」，不會壞掉。
 
-   更新狀態（2026-07-07）：
-     ・作品影片：中村清吾 No.1–10、中村美穂 No.1–6，四語（JA/ZH/KO/EN）已全部填入
+   更新狀態（2026-07-08）：
+     ・作品影片：中村清吾 No.1–9（原 No.10 已刪除）、中村美穂 No.1–6，四語（JA/ZH/KO/EN）已全部填入
+     ・中村清吾 No.9 標題已移除「小」字（原本用來與 No.10「大」對照，No.10 刪除後不再需要）
      ・作家介紹：中村清吾、中村美穂 四語皆已填入
-     ・中村清吾 No.9（JA）：YouTube 端曾處理中，連結已先行放入
    ======================================================================= */
 
 const SITE_DATA = {
@@ -45,7 +45,7 @@ const SITE_DATA = {
         EN: "https://www.youtube.com/shorts/Uhe_ZQj72pE"
       },
 
-      // ★ 作品介紹（共 10 件，No.1–9 已填，No.10 待補）
+      // ★ 作品介紹（共 9 件，No.1–9）
       works: [
         {
           no: 1,
@@ -129,22 +129,12 @@ const SITE_DATA = {
         },
         {
           no: 9,
-          name: { JA: "白磁松竹梅三角湯呑み(小)", ZH: "白瓷松竹梅三角小汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (소)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Small)" },
+          name: { JA: "白磁松竹梅三角湯呑み", ZH: "白瓷松竹梅三角汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design" },
           url:  {
             JA: "https://www.youtube.com/watch?v=VCAf7H03_dQ",
             ZH: "https://www.youtube.com/watch?v=SK--gfXUtIU",
             KO: "https://www.youtube.com/watch?v=Eq05qnysx4U",
             EN: "https://www.youtube.com/watch?v=P8Jb2dh2i5I"
-          }
-        },
-        {
-          no: 10,
-          name: { JA: "白磁松竹梅三角湯呑み(大)", ZH: "白瓷松竹梅三角大汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (대)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Large)" },
-          url:  {
-            JA: "https://www.youtube.com/watch?v=E3rlkb3U-5Q",
-            ZH: "https://www.youtube.com/watch?v=iUd12vReTKc",
-            KO: "https://www.youtube.com/watch?v=492Z_fOw3Uo",
-            EN: "https://www.youtube.com/watch?v=ScT3-GlnOFQ"
           }
         }
       ]
