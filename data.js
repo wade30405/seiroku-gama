@@ -69,7 +69,7 @@ const SITE_DATA = {
         },
         {
           no: 3,
-          name: { JA: "白磁香炉", ZH: "白瓷香炉", KO: "백자 향로", EN: "White Porcelain Incense Burner" },
+          name: { JA: "白磁香炉", ZH: "白瓷香爐", KO: "백자 향로", EN: "White Porcelain Incense Burner" },
           url:  {
             JA: "https://www.youtube.com/watch?v=YCM84VPItTA",
             ZH: "https://www.youtube.com/watch?v=YbWQ74Ht3UQ",
@@ -99,7 +99,7 @@ const SITE_DATA = {
         },
         {
           no: 6,
-          name: { JA: "白磁紅茶碗", ZH: "白瓷红茶杯", KO: "백자 홍차잔", EN: "White Porcelain Teacup" },
+          name: { JA: "白磁紅茶碗", ZH: "白瓷紅茶杯", KO: "백자 홍차잔", EN: "White Porcelain Teacup" },
           url:  {
             JA: "https://www.youtube.com/shorts/j-0WIedLiuo",
             ZH: "https://www.youtube.com/shorts/heas4RyDEo8",
@@ -119,7 +119,7 @@ const SITE_DATA = {
         },
         {
           no: 8,
-          name: { JA: "白磁酒器セット", ZH: "白瓷酒具套装", KO: "백자 주기(술기) 세트", EN: "Set of White Porcelain Sake Vessels" },
+          name: { JA: "白磁酒器セット", ZH: "白瓷酒具套裝", KO: "백자 주기(술기) 세트", EN: "Set of White Porcelain Sake Vessels" },
           url:  {
             JA: "https://www.youtube.com/watch?v=6hStTbpSrTo",
             ZH: "https://www.youtube.com/watch?v=mwjNgF_u6ro",
@@ -129,7 +129,7 @@ const SITE_DATA = {
         },
         {
           no: 9,
-          name: { JA: "白磁松竹梅三角湯呑み", ZH: "白瓷松竹梅三角汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design" },
+          name: { JA: "白磁松竹梅三角湯呑み", ZH: "白瓷松竹梅三角湯吞（松竹梅紋）", KO: "백자 송죽매 삼각 찻잔", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design" },
           url:  {
             JA: "https://www.youtube.com/watch?v=VCAf7H03_dQ",
             ZH: "https://www.youtube.com/watch?v=SK--gfXUtIU",
@@ -161,7 +161,7 @@ const SITE_DATA = {
       works: [
         {
           no: 1,
-          name: { JA: "白の軌跡 ピアス", ZH: "白之轨迹 耳环", KO: "하얀 궤적 귀걸이(피어스)", EN: "Traces of White Earrings" },
+          name: { JA: "白の軌跡 ピアス", ZH: "白之軌跡 耳環", KO: "하얀 궤적 귀걸이(피어스)", EN: "Traces of White Earrings" },
           url:  {
             JA: "https://www.youtube.com/shorts/ykS9pThKd7c",
             ZH: "https://www.youtube.com/shorts/sLHFAwhfdTA",
@@ -171,7 +171,7 @@ const SITE_DATA = {
         },
         {
           no: 2,
-          name: { JA: "白扇 ピアス", ZH: "白扇 耳环", KO: "백선(흰 부채) 귀걸이(피어스)", EN: "White Fan Earrings" },
+          name: { JA: "白扇 ピアス", ZH: "白扇 耳環", KO: "백선(흰 부채) 귀걸이(피어스)", EN: "White Fan Earrings" },
           url:  {
             JA: "https://www.youtube.com/shorts/F5MJIjO-Y0o",
             ZH: "https://www.youtube.com/shorts/qPDt0OEltfA",
@@ -181,7 +181,7 @@ const SITE_DATA = {
         },
         {
           no: 3,
-          name: { JA: "白扇 イヤリング", ZH: "白扇 夹式耳环", KO: "백선(흰 부채) 이어링(클립식)", EN: "White Fan Ear Clips" },
+          name: { JA: "白扇 イヤリング", ZH: "白扇 夾式耳環", KO: "백선(흰 부채) 이어링(클립식)", EN: "White Fan Ear Clips" },
           url:  {
             JA: "https://www.youtube.com/shorts/-BA8QYCKkoI",
             ZH: "https://www.youtube.com/shorts/FCZaJVm39oY",
@@ -191,7 +191,7 @@ const SITE_DATA = {
         },
         {
           no: 4,
-          name: { JA: "白扇 ネックレス", ZH: "白扇 项链", KO: "백선(흰 부채) 목걸이", EN: "White Fan Necklace" },
+          name: { JA: "白扇 ネックレス", ZH: "白扇 項鍊", KO: "백선(흰 부채) 목걸이", EN: "White Fan Necklace" },
           url:  {
             JA: "https://www.youtube.com/shorts/NtVnM-KHr5A",
             ZH: "https://www.youtube.com/shorts/lOMXmIjlAtA",
@@ -201,7 +201,7 @@ const SITE_DATA = {
         },
         {
           no: 5,
-          name: { JA: "飛翔 ブローチ Ⅰ", ZH: "飞翔 胸针 Ⅰ", KO: "비상 브로치 Ⅰ", EN: "Soaring Bird Brooch Ⅰ" },
+          name: { JA: "飛翔 ブローチ Ⅰ", ZH: "飛翔 胸針 Ⅰ", KO: "비상 브로치 Ⅰ", EN: "Soaring Bird Brooch Ⅰ" },
           url:  {
             JA: "https://www.youtube.com/shorts/LG-jePK1nAw",
             ZH: "https://www.youtube.com/shorts/93asWYUx4Lo",
@@ -211,7 +211,7 @@ const SITE_DATA = {
         },
         {
           no: 6,
-          name: { JA: "飛翔 ブローチ Ⅱ", ZH: "飞翔 胸针 Ⅱ", KO: "비상 브로치 Ⅱ", EN: "Soaring Bird Brooch Ⅱ" },
+          name: { JA: "飛翔 ブローチ Ⅱ", ZH: "飛翔 胸針 Ⅱ", KO: "비상 브로치 Ⅱ", EN: "Soaring Bird Brooch Ⅱ" },
           url:  {
             JA: "https://www.youtube.com/shorts/Xfp-0jc45qU",
             ZH: "https://www.youtube.com/shorts/BywTGIaIr4E",
