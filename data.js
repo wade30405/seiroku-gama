@@ -12,10 +12,10 @@
    語言代碼：JA=日本語  ZH=中文  KO=한국어  EN=English
    ※ 留空 "" 的連結，網頁上會自動顯示「準備中」，不會壞掉。
 
-   更新狀態（2026-07-06）：
-     ・作品影片：中村清吾 No.1–10、中村美穂 No.1–6 已全部填入
+   更新狀態（2026-07-07）：
+     ・作品影片：中村清吾 No.1–10、中村美穂 No.1–6，四語（JA/ZH/KO/EN）已全部填入
      ・作家介紹：中村清吾、中村美穂 四語皆已填入
-     ・中村清吾 No.9（JA）：YouTube 端仍處理中，連結已先行放入
+     ・中村清吾 No.9（JA）：YouTube 端曾處理中，連結已先行放入
    ======================================================================= */
 
 const SITE_DATA = {
@@ -52,8 +52,8 @@ const SITE_DATA = {
           name: { JA: "白磁壺Ⅰ", ZH: "白瓷罐Ⅰ", KO: "백자 항아리 Ⅰ", EN: "White Porcelain Jar Ⅰ" },
           url:  {
             JA: "https://www.youtube.com/watch?v=4efv65Jea2E",
-            ZH: "https://www.youtube.com/watch?v=K48nKAjEq84",
-            KO: "https://www.youtube.com/watch?v=-JFymFtOh3g",
+            ZH: "https://www.youtube.com/watch?v=SiOr-Eigh50",
+            KO: "https://www.youtube.com/watch?v=_tOZU6AG1zY",
             EN: "https://www.youtube.com/watch?v=gVnUpgwR_RA"
           }
         },
@@ -62,8 +62,8 @@ const SITE_DATA = {
           name: { JA: "白磁壺Ⅱ", ZH: "白瓷罐Ⅱ", KO: "백자 항아리 Ⅱ", EN: "White Porcelain Jar Ⅱ" },
           url:  {
             JA: "https://www.youtube.com/shorts/94DIzd24iSE",
-            ZH: "https://www.youtube.com/watch?v=EftF08J3nto",
-            KO: "https://www.youtube.com/watch?v=K2RqaC4eXRg",
+            ZH: "https://www.youtube.com/shorts/FLJezuWNXco",
+            KO: "https://www.youtube.com/shorts/fCUvCQPYIH4",
             EN: "https://www.youtube.com/shorts/wM6OUCSSMJw"
           }
         },
@@ -72,8 +72,8 @@ const SITE_DATA = {
           name: { JA: "白磁香炉", ZH: "白瓷香炉", KO: "백자 향로", EN: "White Porcelain Incense Burner" },
           url:  {
             JA: "https://www.youtube.com/watch?v=YCM84VPItTA",
-            ZH: "https://www.youtube.com/watch?v=gqSDdNtAoJs",
-            KO: "https://www.youtube.com/watch?v=kmjokRhGwVc",
+            ZH: "https://www.youtube.com/watch?v=YbWQ74Ht3UQ",
+            KO: "https://www.youtube.com/watch?v=AX-Ezf9eOnk",
             EN: "https://www.youtube.com/watch?v=1NYlqu0RnX4"
           }
         },
@@ -82,8 +82,8 @@ const SITE_DATA = {
           name: { JA: "白磁花入", ZH: "白瓷花瓶", KO: "백자 화병", EN: "White Porcelain Flower Vessel" },
           url:  {
             JA: "https://www.youtube.com/shorts/z7f36YuCtAY",
-            ZH: "https://www.youtube.com/shorts/7dRZdDaPJnY",
-            KO: "https://www.youtube.com/shorts/H3d4sQQKo7U",
+            ZH: "https://www.youtube.com/shorts/UdNuGmTRdvU",
+            KO: "https://www.youtube.com/shorts/q98Ud6u1fwQ",
             EN: "https://www.youtube.com/shorts/0UknpA4yMUE"
           }
         },
@@ -92,8 +92,8 @@ const SITE_DATA = {
           name: { JA: "白磁珈琲碗", ZH: "白瓷咖啡杯", KO: "백자 커피잔", EN: "White Porcelain Coffee Cup" },
           url:  {
             JA: "https://www.youtube.com/shorts/Vi32BJtXIEc",
-            ZH: "https://www.youtube.com/shorts/vrCUkdXxU0s",
-            KO: "https://www.youtube.com/shorts/1wDfaWHR3jY",
+            ZH: "https://www.youtube.com/shorts/Cqj8MA57PBg",
+            KO: "https://www.youtube.com/shorts/Ux27-ecYJCk",
             EN: "https://www.youtube.com/shorts/zx9IE-8iD6U"
           }
         },
@@ -102,8 +102,8 @@ const SITE_DATA = {
           name: { JA: "白磁紅茶碗", ZH: "白瓷红茶杯", KO: "백자 홍차잔", EN: "White Porcelain Teacup" },
           url:  {
             JA: "https://www.youtube.com/shorts/j-0WIedLiuo",
-            ZH: "https://www.youtube.com/shorts/Wboum1chJP8",
-            KO: "https://www.youtube.com/shorts/veW1E6IbQTk",
+            ZH: "https://www.youtube.com/shorts/heas4RyDEo8",
+            KO: "https://www.youtube.com/shorts/aoYWbP-y-1s",
             EN: "https://www.youtube.com/shorts/ry6iQHTLFBg"
           }
         },
@@ -112,8 +112,8 @@ const SITE_DATA = {
           name: { JA: "白磁茶器", ZH: "白瓷茶具", KO: "백자 다기 세트", EN: "White Porcelain Tea Vessel" },
           url:  {
             JA: "https://www.youtube.com/watch?v=OsY7i3LokQM",
-            ZH: "https://www.youtube.com/watch?v=NNSY-wSbVck",
-            KO: "https://www.youtube.com/watch?v=drh9-OUpKsM",
+            ZH: "https://www.youtube.com/watch?v=ExyiMJgvFhs",
+            KO: "https://www.youtube.com/watch?v=1NW5BPwjHQ0",
             EN: "https://www.youtube.com/watch?v=2GOqg-4zqDU"
           }
         },
@@ -122,8 +122,8 @@ const SITE_DATA = {
           name: { JA: "白磁酒器セット", ZH: "白瓷酒具套装", KO: "백자 주기(술기) 세트", EN: "Set of White Porcelain Sake Vessels" },
           url:  {
             JA: "https://www.youtube.com/watch?v=6hStTbpSrTo",
-            ZH: "https://www.youtube.com/watch?v=9JFCz1x3la0",
-            KO: "https://www.youtube.com/watch?v=MFqPtz5NIRA",
+            ZH: "https://www.youtube.com/watch?v=mwjNgF_u6ro",
+            KO: "https://www.youtube.com/watch?v=dosxZB5zFOw",
             EN: "https://www.youtube.com/watch?v=MbVkaE59uzE"
           }
         },
@@ -132,8 +132,8 @@ const SITE_DATA = {
           name: { JA: "白磁松竹梅三角湯呑み(小)", ZH: "白瓷松竹梅三角小汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (소)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Small)" },
           url:  {
             JA: "https://www.youtube.com/watch?v=VCAf7H03_dQ",
-            ZH: "https://www.youtube.com/watch?v=cpGlREz82-o",
-            KO: "https://www.youtube.com/watch?v=U-uF0eDJz20",
+            ZH: "https://www.youtube.com/watch?v=SK--gfXUtIU",
+            KO: "https://www.youtube.com/watch?v=Eq05qnysx4U",
             EN: "https://www.youtube.com/watch?v=P8Jb2dh2i5I"
           }
         },
@@ -142,8 +142,8 @@ const SITE_DATA = {
           name: { JA: "白磁松竹梅三角湯呑み(大)", ZH: "白瓷松竹梅三角大汤吞（松竹梅纹）", KO: "백자 송죽매 삼각 찻잔 (대)", EN: "White Porcelain Triangular Yunomi Teacup, Sho-Chiku-Bai design (Large)" },
           url:  {
             JA: "https://www.youtube.com/watch?v=E3rlkb3U-5Q",
-            ZH: "https://www.youtube.com/watch?v=k4bfiEyY5c8",
-            KO: "https://www.youtube.com/watch?v=n1fG_sYKUdA",
+            ZH: "https://www.youtube.com/watch?v=iUd12vReTKc",
+            KO: "https://www.youtube.com/watch?v=492Z_fOw3Uo",
             EN: "https://www.youtube.com/watch?v=ScT3-GlnOFQ"
           }
         }
@@ -173,60 +173,60 @@ const SITE_DATA = {
           no: 1,
           name: { JA: "白の軌跡 ピアス", ZH: "白之轨迹 耳环", KO: "하얀 궤적 귀걸이(피어스)", EN: "Traces of White Earrings" },
           url:  {
-            JA: "https://www.youtube.com/shorts/c4cTKwRTx7M",
-            ZH: "https://www.youtube.com/shorts/KTbjaRhvJNI",
-            KO: "https://www.youtube.com/shorts/WGzEiqpvOZ8",
-            EN: "https://www.youtube.com/shorts/9gQQRfhkihY"
+            JA: "https://www.youtube.com/shorts/ykS9pThKd7c",
+            ZH: "https://www.youtube.com/shorts/sLHFAwhfdTA",
+            KO: "https://www.youtube.com/shorts/mVMaWBf-YmM",
+            EN: "https://www.youtube.com/shorts/cOFkKP4FgQw"
           }
         },
         {
           no: 2,
           name: { JA: "白扇 ピアス", ZH: "白扇 耳环", KO: "백선(흰 부채) 귀걸이(피어스)", EN: "White Fan Earrings" },
           url:  {
-            JA: "https://www.youtube.com/shorts/UNVY4p4k_Vk",
-            ZH: "https://www.youtube.com/shorts/tlqd2N67JYQ",
-            KO: "https://www.youtube.com/shorts/r8WChzDOvvg",
-            EN: "https://www.youtube.com/shorts/vsN26gT8csk"
+            JA: "https://www.youtube.com/shorts/F5MJIjO-Y0o",
+            ZH: "https://www.youtube.com/shorts/qPDt0OEltfA",
+            KO: "https://www.youtube.com/shorts/luNAdeHRTCQ",
+            EN: "https://www.youtube.com/shorts/8OG_RZSnWA4"
           }
         },
         {
           no: 3,
           name: { JA: "白扇 イヤリング", ZH: "白扇 夹式耳环", KO: "백선(흰 부채) 이어링(클립식)", EN: "White Fan Ear Clips" },
           url:  {
-            JA: "https://www.youtube.com/shorts/FbDnJhYAMkA",
-            ZH: "https://www.youtube.com/shorts/tpdH_JzC_Ms",
-            KO: "https://www.youtube.com/shorts/xtQHwh2Sk0s",
-            EN: "https://www.youtube.com/shorts/swOs-_Tgl2Y"
+            JA: "https://www.youtube.com/shorts/-BA8QYCKkoI",
+            ZH: "https://www.youtube.com/shorts/FCZaJVm39oY",
+            KO: "https://www.youtube.com/shorts/vcwGATkF2Qc",
+            EN: "https://www.youtube.com/shorts/fAa6WPSTcpc"
           }
         },
         {
           no: 4,
           name: { JA: "白扇 ネックレス", ZH: "白扇 项链", KO: "백선(흰 부채) 목걸이", EN: "White Fan Necklace" },
           url:  {
-            JA: "https://www.youtube.com/shorts/L7eibYERp_s",
-            ZH: "https://www.youtube.com/shorts/qBChWVu09Yw",
-            KO: "https://www.youtube.com/shorts/LzUS6WLEnG8",
-            EN: "https://www.youtube.com/shorts/rfq4IfrUvPc"
+            JA: "https://www.youtube.com/shorts/NtVnM-KHr5A",
+            ZH: "https://www.youtube.com/shorts/lOMXmIjlAtA",
+            KO: "https://www.youtube.com/shorts/5mzQ6L8HFZQ",
+            EN: "https://www.youtube.com/shorts/PF1xz-ivC0g"
           }
         },
         {
           no: 5,
           name: { JA: "飛翔 ブローチ Ⅰ", ZH: "飞翔 胸针 Ⅰ", KO: "비상 브로치 Ⅰ", EN: "Soaring Bird Brooch Ⅰ" },
           url:  {
-            JA: "https://www.youtube.com/shorts/vL100xV2elw",
-            ZH: "https://www.youtube.com/shorts/mqBum79SS60",
-            KO: "https://www.youtube.com/shorts/h_BfsiqB0fM",
-            EN: "https://www.youtube.com/shorts/Tu9IKJTw-HQ"
+            JA: "https://www.youtube.com/shorts/LG-jePK1nAw",
+            ZH: "https://www.youtube.com/shorts/93asWYUx4Lo",
+            KO: "https://www.youtube.com/shorts/7RgyRYIiHHc",
+            EN: "https://www.youtube.com/shorts/tr2OYn_PjNU"
           }
         },
         {
           no: 6,
           name: { JA: "飛翔 ブローチ Ⅱ", ZH: "飞翔 胸针 Ⅱ", KO: "비상 브로치 Ⅱ", EN: "Soaring Bird Brooch Ⅱ" },
           url:  {
-            JA: "https://www.youtube.com/shorts/qIcP-ft2gsE",
-            ZH: "https://www.youtube.com/shorts/Tr2Zm6Z6JhY",
-            KO: "https://www.youtube.com/shorts/2BPb_ON6ZQE",
-            EN: "https://www.youtube.com/shorts/UgycVdZT0iQ"
+            JA: "https://www.youtube.com/shorts/Xfp-0jc45qU",
+            ZH: "https://www.youtube.com/shorts/BywTGIaIr4E",
+            KO: "https://www.youtube.com/shorts/N7I5UBui_74",
+            EN: "https://www.youtube.com/shorts/hF2_Sum5FmY"
           }
         }
       ]
