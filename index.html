@@ -115,6 +115,12 @@
       margin: 0 0 6px;
       color: var(--title);
     }
+    .page-title-en {
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      font-size: 0.74rem;
+      margin: 0 0 6px;
+    }
     .page-sub {
       color: var(--muted);
       letter-spacing: 0.14em;
@@ -152,6 +158,20 @@
     }
     .btn .meta { color: var(--gold); font-size: 0.82rem; letter-spacing: 0.1em; white-space: nowrap; }
 
+    /* 導覽用按鈕（首頁作家清單／作家紹介・作品紹介・Instagram）：置中、與語言四宮格同一套比例，不帶右側箭頭 */
+    button.btn.btn-center, a.btn.btn-center {
+      justify-content: center;
+      padding: 22px 24px;
+      font-size: 1.08rem;
+      letter-spacing: 0.1em;
+    }
+    /* 日文主標 + 英文小字上下排列（與官網膠囊同一套排版） */
+    button.btn.btn-stacked, a.btn.btn-stacked {
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
     .btn.pending {
       cursor: not-allowed;
       background: var(--bg2);
@@ -178,24 +198,27 @@
       margin: 18px 0 0;
     }
 
-    /* ---------- 首頁作家選擇（原第二層，改直接置於首頁） ---------- */
-    .home-artists { margin-top: 30px; }
-
-    /* ---------- 首頁外部連結（官網） ---------- */
+    /* ---------- 首頁外部連結（官網，置於作家清單上方） ---------- */
     .home-links {
       display: flex; gap: 12px;
       justify-content: center; flex-wrap: wrap;
-      margin-top: 22px;
+      margin-top: 26px;
     }
     .ig-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 26px;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 12px 30px;
       border: 1px solid var(--gold-soft); border-radius: 999px;
       color: var(--gold); text-decoration: none;
-      font-size: 0.82rem; letter-spacing: 0.18em;
+      font-size: 0.8rem; letter-spacing: 0.14em;
       transition: background .25s ease, box-shadow .25s ease;
     }
     .ig-link:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
+
+    /* 日文主標下方的英文小字（官網膠囊、作家按鈕共用同一套排版） */
+    .caption-en { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); }
+
+    /* ---------- 首頁作家選擇（原第二層，改直接置於首頁） ---------- */
+    .home-artists { margin-top: 16px; }
 
     .center { text-align: center; }
 
@@ -299,13 +322,13 @@
     const UI = {
       JA: { pickLang: "言語をお選びください", pickSection: "ご覧になりたい内容をお選びください",
             artistIntro: "作家紹介", worksIntro: "作品紹介", pickWork: "作品をお選びください",
-            watch: "▶ 動画を見る", pending: "準備中", back: "← 戻る", home: "← ホームへ" },
+            watch: "▶ 動画を見る", pending: "準備中", back: "← 戻る / Back", home: "← ホームへ" },
       ZH: { pickLang: "請選擇語言", pickSection: "請選擇想觀看的內容",
             artistIntro: "作家介紹", worksIntro: "作品介紹", pickWork: "請選擇作品",
-            watch: "▶ 觀看影片", pending: "準備中", back: "← 返回", home: "← 回首頁" },
+            watch: "▶ 觀看影片", pending: "準備中", back: "← 返回 / Back", home: "← 回首頁" },
       KO: { pickLang: "언어를 선택하세요", pickSection: "보고 싶은 내용을 선택하세요",
             artistIntro: "작가 소개", worksIntro: "작품 소개", pickWork: "작품을 선택하세요",
-            watch: "▶ 영상 보기", pending: "준비 중", back: "← 뒤로", home: "← 홈으로" },
+            watch: "▶ 영상 보기", pending: "준비 중", back: "← 뒤로 / Back", home: "← 홈으로" },
       EN: { pickLang: "Choose a language", pickSection: "Choose what you'd like to view",
             artistIntro: "Artist Introduction", worksIntro: "Works", pickWork: "Choose a work",
             watch: "▶ Watch video", pending: "Coming soon", back: "← Back", home: "← Home" }
@@ -342,7 +365,7 @@
       document.getElementById("home-btn").classList.remove("hidden");   // 內頁顯示回首頁鈕
       if (!canAnimate()) return;
       const { animate, stagger } = window.AJS;
-      const targets = card.querySelectorAll(".backbar, .page-title, .page-sub, .btn, .watch-big");
+      const targets = card.querySelectorAll(".backbar, .page-title, .page-title-en, .page-sub, .btn, .watch-big");
       targets.forEach(el => { el.style.opacity = 0; });
       animate(targets, { opacity: [0, 1], y: [12, 0], duration: 560, ease: "out(3)", delay: stagger(60) });
     }
@@ -369,11 +392,18 @@
     const app = document.getElementById("app");
     const getArtist = (id) => SITE_DATA.artists.find(a => a.id === id);
 
-    function optionButton(label, meta, onClick) {
+    // sub があれば、日本語ラベルの下に英語名を小さく重ねて表示（官網膠囊と同じ縦積みレイアウト）
+    function optionButton(label, meta, onClick, sub) {
       const b = document.createElement("button");
       b.className = "btn";
-      const l = document.createElement("span"); l.textContent = label;
+      const l = document.createElement("span");
+      l.textContent = label;
       b.appendChild(l);
+      if (sub) {
+        const subEl = document.createElement("span"); subEl.className = "caption-en"; subEl.textContent = sub;
+        b.appendChild(subEl);
+        b.classList.add("btn-stacked");
+      }
       if (meta) { const m = document.createElement("span"); m.className = "meta"; m.textContent = meta; b.appendChild(m); }
       b.onclick = pressThen(b, onClick);
       return b;
@@ -425,29 +455,38 @@
         card.appendChild(t);
       }
 
-      // 作家選擇（原第二層，改直接置於首頁）
       const tail = [];
-      const list = document.createElement("div"); list.className = "options home-artists";
-      SITE_DATA.artists.forEach(a => {
-        list.appendChild(optionButton(a.name.JA + " / " + a.name.EN, "›", () => showLanguages(a.id)));
-      });
-      card.appendChild(list); tail.push(list);
 
-      // 外部連結
+      // 外部連結（官網，置於作家清單上方）
       const links = [
-        { url: SITE_DATA.website, label: "公式サイト / Official Website" }
+        { url: SITE_DATA.website, label: "公式サイト", sub: "Official Website" }
       ].filter(x => x.url);
       if (links.length) {
         const row = document.createElement("div"); row.className = "home-links";
         links.forEach(x => {
           const a = document.createElement("a");
           a.className = "ig-link"; a.href = x.url;
-          a.target = "_blank"; a.rel = "noopener"; a.textContent = x.label;
+          a.target = "_blank"; a.rel = "noopener";
+          const main = document.createElement("span"); main.textContent = x.label;
+          a.appendChild(main);
+          if (x.sub) {
+            const sub = document.createElement("span"); sub.className = "caption-en"; sub.textContent = x.sub;
+            a.appendChild(sub);
+          }
           pulseOnClick(a);
           row.appendChild(a);
         });
         card.appendChild(row); tail.push(row);
       }
+
+      // 作家選擇（原第二層，改直接置於首頁；按鈕樣式與語言選擇畫面一致：置中、無箭頭、日英上下排列）
+      const list = document.createElement("div"); list.className = "options home-artists";
+      SITE_DATA.artists.forEach(a => {
+        const btn = optionButton(a.name.JA, "", () => showLanguages(a.id), a.name.EN);
+        btn.classList.add("btn-center");
+        list.appendChild(btn);
+      });
+      card.appendChild(list); tail.push(list);
 
       app.appendChild(card);
 
@@ -473,9 +512,10 @@
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
       card.appendChild(backBar("← 戻る / Back", showHome));
-      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA + " / " + artist.name.EN;
+      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA;
+      const en = document.createElement("p"); en.className = "page-title-en"; en.textContent = artist.name.EN;
       const s = document.createElement("p"); s.className = "page-sub"; s.textContent = "言語  /  Language";
-      card.appendChild(h); card.appendChild(s);
+      card.appendChild(h); card.appendChild(en); card.appendChild(s);
       const grid = document.createElement("div"); grid.className = "lang-grid";
       LANGS.forEach(lang => {
         grid.appendChild(optionButton(LANG_LABEL[lang], "", () => showSections(artistId, lang)));
@@ -496,15 +536,16 @@
       const s = document.createElement("p"); s.className = "page-sub";
       s.textContent = LANG_LABEL[lang] + "  ·  " + ui.pickSection;
       card.appendChild(h); card.appendChild(s);
+      // 按鈕樣式與語言選擇畫面一致：置中、無箭頭
       const list = document.createElement("div"); list.className = "options";
-      list.appendChild(optionButton(ui.artistIntro, "›", () => showArtistIntro(artistId, lang)));
-      list.appendChild(optionButton(ui.worksIntro, "›", () => showWorks(artistId, lang)));
+      const introBtn = optionButton(ui.artistIntro, "", () => showArtistIntro(artistId, lang));
+      const worksBtn = optionButton(ui.worksIntro, "", () => showWorks(artistId, lang));
+      introBtn.classList.add("btn-center"); worksBtn.classList.add("btn-center");
+      list.appendChild(introBtn); list.appendChild(worksBtn);
       if (artist.instagram) {
         const a = document.createElement("a");
-        a.className = "btn"; a.href = artist.instagram; a.target = "_blank"; a.rel = "noopener";
-        const l = document.createElement("span"); l.textContent = "Instagram";
-        const m = document.createElement("span"); m.className = "meta"; m.textContent = "↗";
-        a.appendChild(l); a.appendChild(m);
+        a.className = "btn btn-center"; a.href = artist.instagram; a.target = "_blank"; a.rel = "noopener";
+        a.textContent = "Instagram";
         pulseOnClick(a);
         list.appendChild(a);
       }
