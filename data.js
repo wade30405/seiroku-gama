@@ -5,25 +5,27 @@
    ★ 等 YouTube 影片上傳後，把網址填進對應的 "" 引號中間即可。
 
    欄位說明：
-     instagram ........ 首頁的 Instagram 連結
+     siteTitleAlt ..... 首頁標題旁的羅馬字表記
+     instagram（各 artist 內）.... 該作家的 Instagram 連結，顯示在「作家紹介／作品紹介」選單
      intro ............ 「作家介紹」影片（每種語言一支）
      works[].url ...... 每件「作品介紹」影片（每種語言一支）
 
    語言代碼：JA=日本語  ZH=中文  KO=한국어  EN=English
    ※ 留空 "" 的連結，網頁上會自動顯示「準備中」，不會壞掉。
 
-   更新狀態（2026-07-08）：
-     ・作品影片：中村清吾 No.1–9（原 No.10 已刪除）、中村美穂 No.1–6，四語（JA/ZH/KO/EN）已全部填入
-     ・中村清吾 No.9 標題已移除「小」字（原本用來與 No.10「大」對照，No.10 刪除後不再需要）
-     ・作家介紹：中村清吾、中村美穂 四語皆已填入
+   更新狀態（2026-07-09）：
+     ・首頁標語（佐賀・有田｜白磁の窯元…家族の視点で綴っています）已移除
+     ・首頁新增羅馬字表記「清六窯 / Seirokugama」
+     ・Instagram 連結從首頁移到各作家的「作家紹介／作品紹介」選單層
+     ・官網連結標籤新增英文「公式サイト / Official Website」
    ======================================================================= */
 
 const SITE_DATA = {
   siteTitle: "清六窯",
-  tagline: "佐賀・有田｜白磁の窯元\n昭和41年開窯\n白磁の曲線美を受け継ぎ、今へ\n中村清吾の制作と\n窯の日々を家族の視点で綴っています",
+  siteTitleAlt: "Seirokugama",
+  tagline: "",
 
   // ★ 首頁的外部連結
-  instagram: "https://www.instagram.com/seirokugama/",
   website: "https://seirokugama.jp/",
 
   artists: [
@@ -36,6 +38,9 @@ const SITE_DATA = {
         KO: "나카무라 세이고",
         EN: "Nakamura Seigo"
       },
+
+      // ★ 這位作家的 Instagram（顯示在「作家紹介／作品紹介」選單）
+      instagram: "https://www.instagram.com/seirokugama/",
 
       // ★ 作家介紹影片（四語各一支）
       intro: {
@@ -149,6 +154,9 @@ const SITE_DATA = {
         KO: "나카무라 미호",
         EN: "Nakamura Miho"
       },
+
+      // ★ 這位作家的 Instagram（顯示在「作家紹介／作品紹介」選單）
+      instagram: "https://www.instagram.com/rokuto.6plus/",
 
       // ★ 作家介紹影片（四語各一支）
       intro: {

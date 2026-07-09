@@ -169,11 +169,23 @@
       letter-spacing: 0.16em;
     }
 
-    /* ---------- 首頁外部連結（Instagram・官網） ---------- */
+    /* ---------- 首頁羅馬字表記 ---------- */
+    .site-subtitle {
+      text-align: center;
+      color: var(--muted);
+      letter-spacing: 0.24em;
+      font-size: 0.78rem;
+      margin: 18px 0 0;
+    }
+
+    /* ---------- 首頁作家選擇（原第二層，改直接置於首頁） ---------- */
+    .home-artists { margin-top: 30px; }
+
+    /* ---------- 首頁外部連結（官網） ---------- */
     .home-links {
       display: flex; gap: 12px;
       justify-content: center; flex-wrap: wrap;
-      margin-top: 28px;
+      margin-top: 22px;
     }
     .ig-link {
       display: inline-flex; align-items: center; gap: 8px;
@@ -185,23 +197,7 @@
     }
     .ig-link:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
 
-    /* ---------- 首頁進入鈕 ---------- */
     .center { text-align: center; }
-    .start-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 66px; height: 66px; margin-top: 34px;
-      border: 1px solid var(--gold-soft); border-radius: 50%;
-      background: transparent; color: var(--gold);
-      font-size: 1.1rem; cursor: pointer;
-      padding-left: 4px;
-      will-change: transform;
-      transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
-    }
-    .start-btn:hover {
-      border-color: var(--gold);
-      background: var(--gold-faint);
-      box-shadow: 0 0 28px var(--gold-faint);
-    }
 
     /* ---------- 返回列 ---------- */
     .backbar { margin-bottom: 26px; }
@@ -266,7 +262,6 @@
       .page-sub { font-size: 0.76rem; margin-bottom: 24px; }
       button.btn, a.btn { padding: 17px 18px; font-size: 1rem; }
       .lang-grid button.btn { padding: 22px 0; font-size: 1.05rem; }
-      .start-btn { width: 60px; height: 60px; margin-top: 28px; }
     }
   </style>
 </head>
@@ -412,8 +407,13 @@
       const rule = document.createElement("span"); rule.className = "title-rule";
       card.appendChild(rule);
 
-      // 標語（逐行）
+      // 羅馬字表記「清六窯 / Seirokugama」
       const lineEls = [];
+      const subtitle = document.createElement("p"); subtitle.className = "site-subtitle";
+      subtitle.textContent = SITE_DATA.siteTitle + " / " + SITE_DATA.siteTitleAlt;
+      card.appendChild(subtitle); lineEls.push(subtitle);
+
+      // 標語（逐行，留空則不顯示）
       if (SITE_DATA.tagline) {
         const t = document.createElement("p"); t.className = "tagline";
         SITE_DATA.tagline.split("\n").forEach((ln, i) => {
@@ -425,11 +425,17 @@
         card.appendChild(t);
       }
 
-      // 外部連結
+      // 作家選擇（原第二層，改直接置於首頁）
       const tail = [];
+      const list = document.createElement("div"); list.className = "options home-artists";
+      SITE_DATA.artists.forEach(a => {
+        list.appendChild(optionButton(a.name.JA + " / " + a.name.EN, "›", () => showLanguages(a.id)));
+      });
+      card.appendChild(list); tail.push(list);
+
+      // 外部連結
       const links = [
-        { url: SITE_DATA.website, label: "公式サイト" },
-        { url: SITE_DATA.instagram, label: "Instagram" }
+        { url: SITE_DATA.website, label: "公式サイト / Official Website" }
       ].filter(x => x.url);
       if (links.length) {
         const row = document.createElement("div"); row.className = "home-links";
@@ -443,21 +449,12 @@
         card.appendChild(row); tail.push(row);
       }
 
-      // 進入鈕
-      const startWrap = document.createElement("div");
-      const start = document.createElement("button");
-      start.className = "start-btn"; start.textContent = "▶";
-      start.setAttribute("aria-label", "enter");
-      start.onclick = pressThen(start, showArtists);
-      startWrap.appendChild(start);
-      card.appendChild(startWrap); tail.push(startWrap);
-
       app.appendChild(card);
 
       playHome(chars, rule, lineEls, tail);
     }
 
-    // 開場序列：逐字浮現 → 金線展開 → 標語逐行 → 連結/進入鈕 → 進入鈕呼吸
+    // 開場序列：逐字浮現 → 金線展開 → 羅馬字/標語逐行 → 作家選單/外部連結
     function playHome(chars, rule, lines, tail) {
       if (!canAnimate()) return;
       const { animate, stagger } = window.AJS;
@@ -466,34 +463,17 @@
 
       animate(chars, { opacity: [0, 1], y: [30, 0], duration: 850, ease: "out(3)", delay: stagger(70, { start: 120 }) });
       animate(rule,  { opacity: [0, 1], scaleX: [0, 1], duration: 700, ease: "out(3)", delay: 620 });
-      animate(lines, { opacity: [0, 1], y: [14, 0], duration: 650, ease: "out(3)", delay: stagger(130, { start: 780 }) });
+      if (lines.length) animate(lines, { opacity: [0, 1], y: [14, 0], duration: 650, ease: "out(3)", delay: stagger(130, { start: 780 }) });
       if (tail.length) animate(tail, { opacity: [0, 1], y: [12, 0], duration: 650, ease: "out(3)", delay: stagger(140, { start: 1180 }) });
-
-      const start = document.querySelector(".start-btn");
-      if (start) animate(start, { scale: [1, 1.08], duration: 1700, ease: "inOut(2)", loop: true, alternate: true, delay: 1700 });
     }
 
-    /* 畫面 1：選作家 */
-    function showArtists() {
-      app.innerHTML = "";
-      const card = document.createElement("div"); card.className = "card";
-      card.appendChild(backBar("← 戻る / Back", showHome));
-      const list = document.createElement("div"); list.className = "options";
-      SITE_DATA.artists.forEach(a => {
-        list.appendChild(optionButton(a.name.JA, "›", () => showLanguages(a.id)));
-      });
-      card.appendChild(list);
-      app.appendChild(card);
-      enterScreen(card);
-    }
-
-    /* 畫面 2：選語言 */
+    /* 畫面 1：選語言（作家選擇已移到首頁） */
     function showLanguages(artistId) {
       const artist = getArtist(artistId);
       app.innerHTML = "";
       const card = document.createElement("div"); card.className = "card";
-      card.appendChild(backBar("← 戻る / Back", showArtists));
-      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA;
+      card.appendChild(backBar("← 戻る / Back", showHome));
+      const h = document.createElement("h2"); h.className = "page-title"; h.textContent = artist.name.JA + " / " + artist.name.EN;
       const s = document.createElement("p"); s.className = "page-sub"; s.textContent = "言語  /  Language";
       card.appendChild(h); card.appendChild(s);
       const grid = document.createElement("div"); grid.className = "lang-grid";
@@ -505,7 +485,7 @@
       enterScreen(card);
     }
 
-    /* 畫面 3：選「作家介紹 / 作品介紹」 */
+    /* 畫面 2：選「作家介紹 / 作品介紹」 */
     function showSections(artistId, lang) {
       const artist = getArtist(artistId);
       const ui = UI[lang];
@@ -519,12 +499,21 @@
       const list = document.createElement("div"); list.className = "options";
       list.appendChild(optionButton(ui.artistIntro, "›", () => showArtistIntro(artistId, lang)));
       list.appendChild(optionButton(ui.worksIntro, "›", () => showWorks(artistId, lang)));
+      if (artist.instagram) {
+        const a = document.createElement("a");
+        a.className = "btn"; a.href = artist.instagram; a.target = "_blank"; a.rel = "noopener";
+        const l = document.createElement("span"); l.textContent = "Instagram";
+        const m = document.createElement("span"); m.className = "meta"; m.textContent = "↗";
+        a.appendChild(l); a.appendChild(m);
+        pulseOnClick(a);
+        list.appendChild(a);
+      }
       card.appendChild(list);
       app.appendChild(card);
       enterScreen(card);
     }
 
-    /* 畫面 4a：作家介紹 */
+    /* 畫面 3a：作家介紹 */
     function showArtistIntro(artistId, lang) {
       const artist = getArtist(artistId);
       const ui = UI[lang];
@@ -544,7 +533,7 @@
       enterScreen(card);
     }
 
-    /* 畫面 4b：作品介紹 */
+    /* 畫面 3b：作品介紹 */
     function showWorks(artistId, lang) {
       const artist = getArtist(artistId);
       const ui = UI[lang];
