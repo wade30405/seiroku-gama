@@ -208,8 +208,11 @@
       display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
       padding: 12px 30px;
       border: 1px solid var(--gold-soft); border-radius: 999px;
+      background: transparent;
       color: var(--gold); text-decoration: none;
+      font-family: var(--serif);
       font-size: 0.8rem; letter-spacing: 0.14em;
+      cursor: pointer;
       transition: background .25s ease, box-shadow .25s ease;
     }
     .ig-link:hover { background: var(--gold-faint); box-shadow: 0 0 22px var(--gold-faint); }
@@ -217,8 +220,8 @@
     /* 日文主標下方的英文小字（官網膠囊、作家按鈕共用同一套排版） */
     .caption-en { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); }
 
-    /* ---------- 首頁作家選擇（原第二層，改直接置於首頁） ---------- */
-    .home-artists { margin-top: 16px; }
+    /* ---------- 首頁作家選擇（原第二層，改直接置於首頁；按鈕與「公式サイト」膠囊同款） ---------- */
+    .home-artists { margin-top: 20px; align-items: center; }
 
     .center { text-align: center; }
 
@@ -479,11 +482,14 @@
         card.appendChild(row); tail.push(row);
       }
 
-      // 作家選擇（原第二層，改直接置於首頁；按鈕樣式與語言選擇畫面一致：置中、無箭頭、日英上下排列）
+      // 作家選擇（原第二層，改直接置於首頁；按鈕與「公式サイト」膠囊完全同款：.ig-link + .caption-en）
       const list = document.createElement("div"); list.className = "options home-artists";
       SITE_DATA.artists.forEach(a => {
-        const btn = optionButton(a.name.JA, "", () => showLanguages(a.id), a.name.EN);
-        btn.classList.add("btn-center");
+        const btn = document.createElement("button"); btn.className = "ig-link";
+        const main = document.createElement("span"); main.textContent = a.name.JA;
+        const sub = document.createElement("span"); sub.className = "caption-en"; sub.textContent = a.name.EN;
+        btn.appendChild(main); btn.appendChild(sub);
+        btn.onclick = pressThen(btn, () => showLanguages(a.id));
         list.appendChild(btn);
       });
       card.appendChild(list); tail.push(list);
